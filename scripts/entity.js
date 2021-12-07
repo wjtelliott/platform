@@ -11,6 +11,7 @@ let gEntity =
     isVisible: false,
     maxSpeed: 2,
     friction: 0.1,
+    useGravity: true,
     init: function(spritePath, newPos, newVel)
     {
         this.isVisible = true;
@@ -66,9 +67,14 @@ let gEntity =
         this.velocity.x = (this.velocity.x > this.maxSpeed) ? this.maxSpeed : this.velocity.x;
         this.velocity.x = (this.velocity.x < (this.maxSpeed - this.maxSpeed * 2)) ? (this.maxSpeed - this.maxSpeed * 2) : this.velocity.x;
     },
+    applyGravity: function()
+    {
+        // Check to see if gravity value added to velocity Y will make us already 'on the ground', if so return
+        // add gravity to velocity Y, making sure if we 'hit the ground' we are level with it (set the pos to ground pos).
+    },
     applyFriction: function()
     {
-        //todo: does not apply if in air
+        //todo: does not apply if in air?
 
         // make sure we check if this sends us into the other direction and use 0 instead
         if (this.velocity.x > 0)

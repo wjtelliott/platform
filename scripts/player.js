@@ -9,6 +9,8 @@ let playerObj =
     {
         switch (frame)
         {
+            //TODO: Create a frame data obj or class.
+
             //this is for the green player sprite
             // these will reference themselves as 'next', since they only have 1 frame.
             case 'p1_stand': return this.serializeFrameData(67, 196, 66, 92, 'p1_stand');
@@ -57,32 +59,75 @@ Object.assign(playerObj, gEntity);
 playerObj.update = function()
 {
 
-    // add to frame counter, 0 it if we reached limit, change frame.
-    this.frameData.frame = (this.frameData.frame + 1 > this.frameData.frameChangeCounter) ? 0 : this.frameData.frame + 1;
+    { // Frame info
+        // add to frame counter, 0 it if we reached limit, change frame.
+        this.frameData.frame = (this.frameData.frame + 1 > this.frameData.frameChangeCounter) ? 0 : this.frameData.frame + 1;
 
-    if (this.frameData.frame === 0)
-    {
-        let nextFrame = this.getNextPlayerAnimation(this.frameData.frameName);
-        this.setFrames(nextFrame.frameName, 0, 1, this.defaultFrameLength, nextFrame.x, nextFrame.y, nextFrame.width, nextFrame.height);
+        if (this.frameData.frame === 0)
+        {
+            let nextFrame = this.getNextPlayerAnimation(this.frameData.frameName);
+            this.setFrames(nextFrame.frameName, 0, 1, this.defaultFrameLength, nextFrame.x, nextFrame.y, nextFrame.width, nextFrame.height);
+        }
     }
 
-    if (this.keyPresses['d'])
-    {
-        this.velocity.x+=this.defaultPlayerAccel;
-        this.isFacingLeft = false;
-    } else if (this.keyPresses['a'])
-    {
-        this.velocity.x-=this.defaultPlayerAccel;
-        this.isFacingLeft = true;
+    { // Movement updates
+        if (this.keyPresses['s'] == null) this.keyPresses['s'] = false;
+        if (this.keyPresses['z'] == null) this.keyPresses['z'] = false;
+        //duck
+        if (this.keyPresses['s'])
+        {
+            // this will take priority over movement. 
+            if (this.frameData.frameName != 'p1_duck')
+            {
+                this.changeToFrameSet('p1_duck');
+                this.position.y += 21;
+            }
+        }
+        else if (this.keyPresses['z'])
+        {
+            // check duck height
+            if (this.frameData.frameName == 'p1_duck')
+                this.position.y -= 21;
+            if (this.frameData.frameName != 'p1_front')
+                this.changeToFrameSet('p1_front');
+        }
+        else
+        {
+            // check duck height
+            if (this.frameData.frameName == 'p1_duck')
+                this.position.y -= 21;
+
+            if (this.frameData.frameName == 'p1_duck' || this.frameData.frameName == 'p1_front')
+                this.changeToFrameSet('p1_walk11');
+            
+            // movement
+            if (this.keyPresses['d'])
+            {
+                this.velocity.x+=this.defaultPlayerAccel;
+                this.isFacingLeft = false;
+            }
+            if (this.keyPresses['a'])
+            {
+                this.velocity.x-=this.defaultPlayerAccel;
+                this.isFacingLeft = true;
+            }
+        }
+    }
+    
+
+    { // forces updates
+        this.applyGravity();
+
+        this.clampVelocity();
+
+        this.position.x += this.velocity.x;
+
+        this.applyFriction();
     }
 
-    this.clampVelocity();
 
-    this.position.x += this.velocity.x;
-
-    this.applyFriction();
-
-    if (Math.abs(this.velocity.x === 0))
+    // final animation passes.
+    if (Math.abs(this.velocity.x === 0) && this.keyPresses['s'] == false && this.keyPresses['z'] == false)
     {
         this.changeToFrameSet('p1_stand');
         
@@ -91,13 +136,15 @@ playerObj.update = function()
     {
         if (this.frameData.frameName == 'p1_stand')
         {
+            // start on last movement frame to make the 'next' frame, which is the first to show,
+            //be the frame that is first in loop
             this.changeToFrameSet('p1_walk11');
         }
     }
 };
 
 // init obj
-playerObj.init('./resources/player/green_sprites.png', {x: 20, y:20}, {x: 0, y:0});
+playerObj.init('./resources/player/green_sprites.PNG', {x: 20, y:20}, {x: 0, y:0});
 
 // set first anim. TODO: Maybe add this to init?
 let greenFrames = playerObj.getNextPlayerAnimation('p1_walk01');
@@ -118,8 +165,7 @@ function demo()
     playerObj.update();
     if (playerObj.isFacingLeft)
     {
-        // Draw player flipped here.
-        gRender.drawSerializedImage(playerObj.serializeObjectToDraw());
+        gRender.drawSerializedImageFlipped(playerObj.serializeObjectToDraw());
     } else {
         
         gRender.drawSerializedImage(playerObj.serializeObjectToDraw());

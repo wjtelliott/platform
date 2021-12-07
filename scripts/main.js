@@ -28,6 +28,10 @@ window.onload = function()
 {
     setInterval(function() {
         
+        // use our demo loop here
         demo();
-    }, 10);
+    }, 
+    // 10? idk bro
+    10 
+    );
 };
