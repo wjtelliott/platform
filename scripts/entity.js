@@ -1,26 +1,41 @@
 //Basic game entity. This will be imported to multiple game objects
 
-let gEntity = 
+const ENTITY_MAX_SPEED = 2;
+const ENTITY_TERMINAL_FALL = 5;
+const ENTITY_FRICTION = 0.2;
+const ENTITY_FRICTION_ICE = 0.05;
+const ENTITY_GRAVITY = .3;
+
+class gEntity
 {
-    //use spritesheet or just a plain image. spritesheet will be used each time
-    spriteSheet: null,
-    position: {x: 0, y: 0},
-    velocity: {x: 0, y: 0},
-    frameData: {frameName: '', frame: 0, frameSpeed: 1, frameChangeCounter: 0, frameX: 0, frameY: 0, frameWidth: 1, frameHeight: 1},
-    size: {width: 1, height: 1},
-    isVisible: false,
-    maxSpeed: 2,
-    friction: 0.1,
-    useGravity: true,
-    init: function(spritePath, newPos, newVel)
+    spriteSheet;
+    position;
+    velocity;
+    frameData;
+    size;
+    isVisible;
+    maxSpeed;
+    maxFall;
+    friction;
+    gravityForce;
+    useGravity;
+    constructor(spritePath, newPos, newVel)
     {
-        this.isVisible = true;
         this.spriteSheet = new Image();
         this.spriteSheet.src = spritePath;
         this.position = newPos;
         this.velocity = newVel;
-    },
-    setFrames: function(currentFrameName, currentFrame, currentFrameSpeed, currentFrameChangeCounter, currentFramePosX, currentFramePosY, currentFrameWidth, currentFrameHeight)
+        this.frameData = new gFrameData();
+        this.size = new gSize(70, 70);
+        this.isVisible = true;
+        this.maxSpeed = ENTITY_MAX_SPEED;
+        this.friction = ENTITY_FRICTION;
+        this.useGravity = true;
+        this.gravityForce = ENTITY_GRAVITY;
+        this.maxFall = ENTITY_TERMINAL_FALL;
+    }
+
+    setFrames(currentFrameName, currentFrame, currentFrameSpeed, currentFrameChangeCounter, currentFramePosX, currentFramePosY, currentFrameWidth, currentFrameHeight)
     {
         this.frameData =
         {
@@ -33,16 +48,9 @@ let gEntity =
             frameWidth: currentFrameWidth,
             frameHeight: currentFrameHeight
         };
-    },
-    serializeVector2: function(v2x, v2y)
-    {
-        return {x: v2x, y: v2y};
-    },
-    update: function()
-    {
-        //logic to be overriden
-    },
-    serializeObjectToDraw: function()
+    }
+
+    serializeObjectToDraw()
     {
         // return a serialized object to draw.
         /*
@@ -60,29 +68,5 @@ let gEntity =
             drawWidth: this.size.width,
             drawHeight: this.size.height
         };
-    },
-    clampVelocity: function()
-    {
-        // this keeps velocity in ranges of -maxSpeed to maxSpeed.
-        this.velocity.x = (this.velocity.x > this.maxSpeed) ? this.maxSpeed : this.velocity.x;
-        this.velocity.x = (this.velocity.x < (this.maxSpeed - this.maxSpeed * 2)) ? (this.maxSpeed - this.maxSpeed * 2) : this.velocity.x;
-    },
-    applyGravity: function()
-    {
-        // Check to see if gravity value added to velocity Y will make us already 'on the ground', if so return
-        // add gravity to velocity Y, making sure if we 'hit the ground' we are level with it (set the pos to ground pos).
-    },
-    applyFriction: function()
-    {
-        //todo: does not apply if in air?
-
-        // make sure we check if this sends us into the other direction and use 0 instead
-        if (this.velocity.x > 0)
-        {
-            this.velocity.x = (this.velocity.x - this.friction < 0) ? 0 : this.velocity.x - this.friction;
-        } else if (this.velocity.x < 0)
-        {
-            this.velocity.x = (this.velocity.x + this.friction > 0) ? 0 : this.velocity.x + this.friction;
-        }
     }
 }
