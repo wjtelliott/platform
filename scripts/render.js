@@ -35,16 +35,11 @@ let gRender =
     },
     drawSerializedImage: function(serializedObject, flipped)
     {
-        if (flipped == null) flipped = false;
-        if (!flipped)
-            this.context.drawImage(serializedObject.sprite, serializedObject.sourceX, serializedObject.sourceY,
-                serializedObject.sourceWidth, serializedObject.sourceHeight,
-                serializedObject.posX, serializedObject.posY,
-                serializedObject.drawWidth, serializedObject.drawHeight);
-        else // While flipped, we will translate to obj position already, use 0 for pos
-            this.context.drawImage(serializedObject.sprite, serializedObject.sourceX, serializedObject.sourceY,
-                serializedObject.sourceWidth, serializedObject.sourceHeight,
-                0, 0,
-                serializedObject.drawWidth, serializedObject.drawHeight);
+        // If we draw flipped, we should have already translated our location
+        if (serializedObject == null) return;
+        this.context.drawImage(serializedObject.sprite, serializedObject.sourceX, serializedObject.sourceY,
+            serializedObject.sourceWidth, serializedObject.sourceHeight,
+            (flipped == null || !flipped) ? serializedObject.posX : 0, (flipped == null || !flipped) ? serializedObject.posY : 0,
+            serializedObject.drawWidth, serializedObject.drawHeight);
     }
 }
