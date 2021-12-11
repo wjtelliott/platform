@@ -1,7 +1,5 @@
-
-
-// scripts are loaded from last element to first. last element being most important.
-// We are locking this while we load each script. maybe choose which are async ect later when we have more scripts.
+// Some of these scripts will have to load before the next.
+// This list has priority to load the last first, and needs to be in that order.
 let scriptsList = [
     './scripts/player.js',
     './scripts/tile.js',
@@ -15,21 +13,21 @@ const loadScripts = function()
     if (scriptsList.length > 0)
         runJScriptFile(scriptsList.pop());
 }
-
 function runJScriptFile(path)
 {
     let script = document.createElement('script');
     script.setAttribute('src', path);
+
+    // Make sure we declare this before appending it to body
     script.onload = function() { loadScripts(); };
     document.body.append(script);
 }
 
+// Load all the scripts
 loadScripts();
 
 
-/* I had to rewrite all my code from objects to classes because of
-deep cloning being a thing in JS... I just wanted to be a .net programmer... */
-
+// Wait until the window is loaded before we start the game loop
 window.onload = function()
 {
     setInterval(function() {
@@ -37,7 +35,8 @@ window.onload = function()
         // use our demo loop here
         demo();
     }, 
-    // 16? idk bro
+    // 16 will give us 'about' 60 times a second.
+    // We can change this value later if needed.
     16 
     );
 };
