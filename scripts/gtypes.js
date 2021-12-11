@@ -6,6 +6,8 @@ class gVector2
         this.x = (newX == null) ? 0 : newX;
         this.y = (newY == null) ? 0 : newY;
     }
+    static Zero()
+    { return new gVector2(); }
     serializeVector2(newX, newY)
     {
         return {x: (newX == null) ? 0 : newX,

@@ -2,14 +2,29 @@ let gRender =
 {
     context: document.querySelector('.canvas').getContext('2d'),
     canvasObj: document.querySelector('.canvas'),
+    cameraPosition: gVector2.Zero(),
     drawSpace:
     {
         width: document.querySelector('.canvas').width,
         height: document.querySelector('.canvas').height
     },
+    getCameraPositionDelta: function(pos)
+    {
+        // get pos and return delta from this viewport position
+        return new gVector2(
+            pos.x - this.cameraPosition.x,
+            pos.y - this.cameraPosition.y
+        );
+    },
+    updateCameraPosition: function(newPos)
+    {
+        let delta = this.getCameraPositionDelta(newPos);
+        this.cameraPosition = newPos;
+        this.context.translate(-delta.x, -delta.y);
+    },
     clearScreen: function()
     {
-        this.context.clearRect(0, 0, this.drawSpace.width, this.drawSpace.height);
+        this.context.clearRect(-200, 0, this.drawSpace.width + 500, this.drawSpace.height);
     },
     drawImage: function(sprites, sourceX, sourceY, sourceWidth, sourceHeight, posX, posY, drawWidth, drawHeight)
     {

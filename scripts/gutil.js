@@ -1,7 +1,10 @@
 class gUtil
 {
-    static clampVelocity(max, current, min)
+    static clampVelocity(max, current, min, jump)
     {
+        jump = (jump == null) ? false : true;
+        if (jump && current < 0) return current;
+
         if (max == null || current == null) return 0;
         if (min == null) min = max - (max * 2);
 

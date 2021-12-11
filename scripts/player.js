@@ -76,7 +76,7 @@ class gPlayer extends gEntity
                 if (gUtil.playerPressedKeys['w'])
                 {
                     if (this.velocity.y == 0)
-                        this.velocity.y -= 10;
+                        this.velocity.y -= 9;
                     this.changeToFrameSet('p1_jump');
                 }
 
@@ -112,7 +112,7 @@ class gPlayer extends gEntity
 
             // gravity and clamp for terminal
             this.velocity.y = gUtil.applyGravity(this.velocity.y, Math.min(this.gravityForce, ENTITY_GRAVITY));
-            this.velocity.y = gUtil.clampVelocity(Math.max(this.maxFall, ENTITY_TERMINAL_FALL), this.velocity.y);
+            this.velocity.y = gUtil.clampVelocity(Math.max(this.maxFall, ENTITY_TERMINAL_FALL), this.velocity.y, null, true);
     
             // clamp walk/run speed
             this.velocity.x = gUtil.clampVelocity(Math.max(this.maxSpeed, ENTITY_MAX_SPEED), this.velocity.x);
@@ -198,6 +198,7 @@ for (let i = 0; i < 6; i++)
     map.push(newTileClass);
 }
 
+
 function demo()
 {
 
@@ -234,6 +235,12 @@ function demo()
         
         gRender.drawSerializedImage(pobj.serializeObjectToDraw());
     }
+
+    //basic camera positioning
+    let nV = new gVector2(parseInt(pobj.position.x + (pobj.frameData.frameWidth / 2) - (gRender.drawSpace.width / 2)),
+                            parseInt(pobj.position.y - (gRender.drawSpace.height / 2) + (pobj.frameData.frameHeight / 2)));
+    gRender.updateCameraPosition(nV);
+    
 }
 
 
