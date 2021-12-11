@@ -29,7 +29,7 @@ class gBoundingBox
     {
         // return true / false if this BB has any of the other box colliding at all
         //using monogame framework return here
-        return
+        return (value == null) ? false :
         ((((this.x <= value.x) &&
         ((value.x + value.width) <= (this.x + this.width))) &&
         (this.y <= value.y)) &&
@@ -85,13 +85,13 @@ class gFrameData
     }
     setFrames(currentFrameName, currentFrame, currentFrameSpeed, currentFrameChangeCounter, currentFramePosX, currentFramePosY, currentFrameWidth, currentFrameHeight)
     {
-        this.frameName = currentFrameName;
-        this.currentFrame = currentFrame;
-        this.frameSpeed = currentFrameSpeed;
-        this.frameChangeCounter = currentFrameChangeCounter;
-        this.frameX = currentFramePosX;
-        this.frameY = currentFramePosY;
-        this.frameWidth = currentFrameWidth;
-        this.frameHeight = currentFrameHeight;
+        this.frameName = (currentFrameName == null) ? '' : currentFrameName;
+        this.currentFrame = (currentFrame == null) ? 0 : currentFrame;
+        this.frameSpeed = (currentFrameSpeed == null) ? 0 : currentFrameSpeed;
+        this.frameChangeCounter = (currentFrameChangeCounter == null) ? 1 : currentFrameChangeCounter;
+        this.frameX = (currentFramePosX == null) ? 0 : currentFramePosX;
+        this.frameY = (currentFramePosY == null) ? 0 : currentFramePosY;
+        this.frameWidth = (currentFrameWidth == null) ? 1 : currentFrameWidth;
+        this.frameHeight = (currentFrameHeight == null) ? 1 : currentFrameHeight;
     }
 }
