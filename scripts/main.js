@@ -2,6 +2,7 @@
 // This list has priority to load the last first, and needs to be in that order.
 let scriptsList = [
     './scripts/player.js',
+    './scripts/map.js',
     './scripts/tile.js',
     './scripts/render.js',
     './scripts/entity.js',

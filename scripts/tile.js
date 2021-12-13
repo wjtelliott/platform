@@ -29,15 +29,32 @@ class gTileClass
     {
         this.spriteSource = newSource;
         this.position = newPos;
-        this.size = {width: this.spriteSource.width, height: this.spriteSource.height};
+        this.size = {width: (this.spriteSource == null) ? 1 : this.spriteSource.width,
+                    height: (this.spriteSource == null) ? 1 : this.spriteSource.height};
         this.isVisible = true;
         this.isSolid = true;
         this.isWall = false;
     }
 
+
+    static randomTileSource()
+    {
+        switch (Math.floor(Math.random() * 6))
+        {
+            default:
+            case 0:
+            case 1:
+            case 2: return null;
+            case 3: return {x: 288, y: 792, width: 70, height: 70};
+            case 4: return {x: 360, y: 792, width: 70, height: 70};
+            case 5: return {x: 288, y: 432, width: 70, height: 70};
+        }
+    }
+
     serializeTileToDraw()
     {
-        return {
+        return (this.spriteSource == null) ? null : 
+        {
             sprite: gTileSpriteSheet,
             sourceX: this.spriteSource.x,
             sourceY: this.spriteSource.y,
@@ -54,21 +71,21 @@ class gTileClass
 class gBackgroundTileClass extends gTileClass
 {
     backgroundType;
-    constructor(newSource, newPos) { super(newSource, newPos); this.backgroundType = 0; this.isSolid = false; }
+    constructor(newSource, newPos) { super(newSource, newPos); this.backgroundType = 1; this.isSolid = false; }
 
     // override draw to return corrisponding bg png
     serializeTileToDraw()
     {
         return {
             sprite: (this.backgroundType === 0) ? gBackground_Blue : gBackground_Castle,
-            sourceX: this.spriteSource.x,
-            sourceY: this.spriteSource.y,
-            sourceWidth: this.spriteSource.width,
-            sourceHeight: this.spriteSource.height,
+            sourceX: 0,
+            sourceY: 0,
+            sourceWidth: (this.backgroundType === 0) ? gBackground_Blue.width : gBackground_Castle.width,
+            sourceHeight: (this.backgroundType === 0) ? gBackground_Blue.height : gBackground_Castle.height,
             posX: this.position.x,
             posY: this.position.y,
-            drawWidth: this.size.width,
-            drawHeight: this.size.height
+            drawWidth: (this.backgroundType === 0) ? gBackground_Blue.width : gBackground_Castle.width,
+            drawHeight: (this.backgroundType === 0) ? gBackground_Blue.height : gBackground_Castle.height
         };
     }
 }

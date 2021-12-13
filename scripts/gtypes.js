@@ -20,10 +20,10 @@ class gBoundingBox
     x;y;width;height;
     constructor(newX, newY, newWidth, newHeight)
     {
-        this.x = newX;
-        this.y = newY;
-        this.width = newWidth;
-        this.height = newHeight;
+        this.x = (newX == null) ? 0: newX;
+        this.y = (newY == null) ? 0 : newY;
+        this.width = (newWidth == null) ? 1 : newWidth;
+        this.height = (newHeight == null) ? 1 : newHeight;
     }
 
     // this expects another gBoundingBox

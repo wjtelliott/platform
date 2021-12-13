@@ -50,6 +50,35 @@ class gEntity
         };
     }
 
+
+
+    update()
+    {
+        /*
+            When dealing with forces, we will prioritize the following values from entity global or (this.)entity personal:
+            gravity: Minimum value
+            Terminal fall rate: Maximum value
+            Run walk speed: Maximum
+            Friction: Minimum
+        */
+        // gravity and clamp for max speeds. No maximum value on upwards Y clamp
+        if (this.useGravity)
+            this.velocity.y = gUtil.applyGravity(this.velocity.y, Math.min(this.gravityForce, ENTITY_GRAVITY));
+        this.velocity.y = gUtil.clampVelocity(Math.max(this.maxFall, ENTITY_TERMINAL_FALL), this.velocity.y, null, true);
+        this.velocity.x = gUtil.clampVelocity(Math.max(this.maxSpeed, ENTITY_MAX_SPEED), this.velocity.x);
+
+        // basic collision check with bottom of map:
+        if (this.velocity.y != 0)
+            this.velocity.y = gUtil.collisionFloorCheck(this.velocity.y, this.position.y, this.size.height, 220, 230);
+        
+        // add to our position ( velocity should already have been changed for collisions )
+        this.position.x += this.velocity.x;
+        this.position.y += this.velocity.y;
+
+        // decrease speed from friction
+        this.velocity.x = gUtil.applyFriction(Math.min(this.friction, ENTITY_FRICTION), this.velocity.x);
+    }
+
     serializeObjectToDraw()
     {
         // return a serialized object to draw.

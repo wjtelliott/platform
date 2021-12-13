@@ -24,13 +24,18 @@ class gUtil
     {
         if (frictionValue == null) frictionValue = 0;
         if (velocityX == null) velocityX = 0;
-        if (velocityX > 0)
-            return (velocityX - frictionValue < 0) ? 0 : velocityX - frictionValue;
-        return (velocityX + frictionValue > 0) ? 0 : velocityX + frictionValue;
+        
+
+        return (velocityX > 0) ?
+            (velocityX - frictionValue < 0) ? 0 : velocityX - frictionValue
+            :
+            (velocityX + frictionValue > 0) ? 0 : velocityX + frictionValue;
     }
 
     static applyGravity(gravityValue, velocityY)
     {
+        // even though we just add here, I made this a seperate function incase
+        // we need it to expand complexity later.
         if (gravityValue == null) gravityValue = 0;
         if (velocityY == null) velocityY = 0;
         return velocityY + gravityValue;
@@ -48,9 +53,9 @@ class gUtil
         return (velocityY + positionY + frameHeight > floorY &&
             velocityY + positionY + frameHeight < floorYBottom) ?
         
-        (floorY - positionY - frameHeight)
-          
-        : velocityY;
+        (floorY - positionY - frameHeight)          
+        : 
+        velocityY;
     
 
     }
