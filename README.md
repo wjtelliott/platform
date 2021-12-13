@@ -1,14 +1,17 @@
 
 ###############################################################################
+
 This is a simple platformer I created for fun and to test my limits on JS canvas / object inheritance in JS.
 
 As of the latest commit, I've reworked the project to use classes instead of js objects.
 I found this more readable and less messy with using class extends rather than trying to deep clone
 objects for inheritance. Objects not inherited were kept.
+
 ###############################################################################
 
 
 ###############################################################################
+
 Past commit features:
 - Basic serialization and rendering
 - Basic entity functions
@@ -29,10 +32,12 @@ Next commit(s) features:
 - Add enemy class & functions
 - Add object / collectables class & functions
 - Add friction change on ice
+
 ###############################################################################
 
 
 ###############################################################################
+
 Sprites were imported for ease, but are found on OpenGameArt.Org
 
 	Platformer graphics (Deluxe) by Kenney Vleugels (www.kenney.nl)
