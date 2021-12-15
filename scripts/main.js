@@ -29,15 +29,30 @@ loadScripts();
 
 
 // Wait until the window is loaded before we start the game loop
-window.onload = function()
-{
-    setInterval(function() {
+// window.onload = function()
+// {
+//     setInterval(function() {
         
-        // use our demo loop here
-        demo();
-    }, 
-    // 16 will give us 'about' 60 times a second.
-    // We can change this value later if needed.
-    16 
+//         // use our demo loop here
+//         demo();
+//     }, 
+//     // 16 will give us 'about' 60 times a second.
+//     // We can change this value later if needed.
+//     16 
+//     );
+// };
+
+
+let startDemo;
+function startGame()
+{
+    startDemo = setInterval(
+        function() {
+            demo();
+        }, 16
     );
-};
+}
+function stopGame()
+{
+    clearInterval(startDemo);
+}
