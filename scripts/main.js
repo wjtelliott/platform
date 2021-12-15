@@ -25,7 +25,7 @@ function runJScriptFile(path)
 }
 
 // Load all the scripts
-loadScripts();
+//loadScripts();
 
 
 // Wait until the window is loaded before we start the game loop
