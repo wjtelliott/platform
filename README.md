@@ -1,16 +1,15 @@
+# wjtelliott / platform
 
-###############################################################################
 
-This is a simple platformer I created for fun and to test my limits on JS canvas / object inheritance in JS.
+## This is a simple platformer I created for fun and to test my limits on JS canvas / object inheritance in JS.
 
 As of the latest commit, I've reworked the project to use classes instead of js objects.
 I found this more readable and less messy with using class extends rather than trying to deep clone
 objects for inheritance. Objects not inherited were kept.
 
-###############################################################################
+![A snippet of the demo!](/gitmd/snip.JPG "Demo Snip")
 
-
-###############################################################################
+***
 
 Past commit features:
 - Basic serialization and rendering
@@ -33,10 +32,17 @@ Next commit(s) features:
 - Add object / collectables class & functions
 - Add friction change on ice
 
-###############################################################################
+***
 
 
-###############################################################################
+## Known bugs:
+
+1. loadScripts() causes memory leaks **unless running on local machine.**
+2. startGame() causes memory leaks **unless running on local machine.**
+3. If player velocity is higher than width of platform, collision is ignored.
+
+
+***
 
 Sprites were imported for ease, but are found on OpenGameArt.Org
 
@@ -50,4 +56,4 @@ Sprites were imported for ease, but are found on OpenGameArt.Org
 	You may use these graphics in personal and commercial projects.
 	Credit (Kenney or www.kenney.nl) would be nice but is not mandatory.
 
-###############################################################################
+***
