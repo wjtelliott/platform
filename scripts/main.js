@@ -2,6 +2,7 @@
 // This list has priority to load the last first, and needs to be in that order.
 let scriptsList = [
     './scripts/player.js',
+    './scripts/ui.js',
     './scripts/map.js',
     './scripts/tile.js',
     './scripts/render.js',
@@ -24,23 +25,21 @@ function runJScriptFile(path)
     document.body.append(script);
 }
 
-// Load all the scripts
-//loadScripts();
 
 
-// Wait until the window is loaded before we start the game loop
-// window.onload = function()
-// {
-//     setInterval(function() {
-        
-//         // use our demo loop here
-//         demo();
-//     }, 
-//     // 16 will give us 'about' 60 times a second.
-//     // We can change this value later if needed.
-//     16 
-//     );
-// };
+window.onload = function()
+{
+    
+
+    let basicMainMenu = new gBasicMenu();
+    basicMainMenu.addLabel('wjtelliott/platform');
+    basicMainMenu.addButton('loadScriptBtn', 'Load scripts (do this first)', 'loadScripts()', true);
+    basicMainMenu.addButton('startBtn', 'Start game', 'startGame()', true);
+
+    basicMainMenu.pushToDoc();
+
+    basicMainMenu.show();
+};
 
 
 let startDemo;
