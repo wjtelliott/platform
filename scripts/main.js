@@ -31,7 +31,6 @@ window.onload = function()
     
 
     let basicMainMenu = new gBasicMenu();
-    basicMainMenu.addLabel('wjtelliott/platform');
     basicMainMenu.addButton('loadScriptBtn', 'Load Scripts (do this first)', 'loadScripts();', true);
     basicMainMenu.addButton('loadMapBtn', 'Load map (do this second)', 'testBgMap.loadTestRoom();', true);
     
