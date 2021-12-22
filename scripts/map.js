@@ -21,8 +21,8 @@ class gMap
     {
 
         // Set map basic vars
-        let testMapWidth = 12;
-        let testMapHeight = 5;
+        let testMapWidth = 1;
+        let testMapHeight = 1;
         // Need these for actual pixel lengths
         let testMapWidth_Actual = testMapWidth * 70;
         let testMapHeight_Actual = testMapHeight * 70;

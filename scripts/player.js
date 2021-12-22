@@ -148,7 +148,7 @@ window.addEventListener('keyup', gUtil.keyUpListener, false);
 
 
 let testBgMap = new gMap();
-testBgMap.loadTestRoom();
+//testBgMap.loadTestRoom();
 
 // simple demo loop, move this later when a real game loop is made
 function demo()

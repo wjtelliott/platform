@@ -1,23 +1,13 @@
 // Some of these scripts will have to load before the next.
 // This list has priority to load the last first, and needs to be in that order.
 let scriptsList = [
-
-    /*
-
-        We unfortunately have to use a direct address here, otherwise
-        github.io will NOT load correctly and will crash our page.
-
-        Tested, and using these addresses works locally, as well as ./scripts/...js
-
-     */
-
-    'https://wjtelliott.github.io/platform/scripts/player.js',
-    'https://wjtelliott.github.io/platform/scripts/map.js',
-    'https://wjtelliott.github.io/platform/scripts/tile.js',
-    'https://wjtelliott.github.io/platform/scripts/render.js',
-    'https://wjtelliott.github.io/platform/scripts/entity.js',
-    'https://wjtelliott.github.io/platform/scripts/gutil.js',
-    'https://wjtelliott.github.io/platform/scripts/gtypes.js',
+    './scripts/player.js',
+    './scripts/map.js',
+    './scripts/tile.js',
+    './scripts/render.js',
+    './scripts/entity.js',
+    './scripts/gutil.js',
+    './scripts/gtypes.js',
 ];
 const loadScripts = function()
 {
@@ -42,7 +32,9 @@ window.onload = function()
 
     let basicMainMenu = new gBasicMenu();
     basicMainMenu.addLabel('wjtelliott/platform');
-    basicMainMenu.addButton('loadScriptBtn', 'Load scripts (do this first)', 'loadScripts()', true);
+    basicMainMenu.addButton('loadScriptBtn', 'Load Scripts (do this first)', 'loadScripts();', true);
+    basicMainMenu.addButton('loadMapBtn', 'Load map (do this second)', 'testBgMap.loadTestRoom();', true);
+    
     basicMainMenu.addButton('startBtn', 'Start game', 'startGame()', true);
 
     basicMainMenu.pushToDoc();
