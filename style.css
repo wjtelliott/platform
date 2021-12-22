@@ -1,0 +1,28 @@
+*
+{
+    text-align: center;
+}
+
+h2
+{
+    font-size: 16px;
+}
+
+p
+{
+    font-size: 14px;
+}
+
+canvas
+{
+    margin: auto;
+    display: block;
+}
+
+button
+{
+    font-size: 24px;
+    color: ghostwhite;
+    background-color: black;
+    margin: auto;
+}

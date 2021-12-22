@@ -31,14 +31,17 @@ window.onload = function()
     
 
     let basicMainMenu = new gBasicMenu();
-    basicMainMenu.addButton('loadScriptBtn', 'Load Scripts (do this first)', 'loadScripts();', true);
-    basicMainMenu.addButton('loadMapBtn', 'Load map (do this second)', 'testBgMap.loadTestRoom();', true);
+    // basicMainMenu.addButton('loadScriptBtn', 'Load Scripts (do this first)', 'loadScripts();', true);
+    loadScripts(); // No need for a button on this
+    basicMainMenu.addButton('loadMapBtn', 'Load map', 'testBgMap.loadTestRoom(); document.querySelector(\'#startBtn\').style = \'display: block;\'', true);
     
-    basicMainMenu.addButton('startBtn', 'Start game', 'startGame()', true);
+    basicMainMenu.addButton('startBtn', 'Start game', 'startGame(); document.querySelector(\'#controls\').style = \'display: block;\'', true);
 
     basicMainMenu.pushToDoc();
 
     basicMainMenu.show();
+
+    document.querySelector('#startBtn').style = "display: none;";
 };
 
 

@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <link rel='stylesheet' href='./style.css'>
+    </head>
     <body>
         <h1>wjtelliott/platform</h1>
-        <h2>Randomly generated map</h2>
+        <p>Click the buttons below to load the test map & start the demonstration</p>
+        <h2>random gen map info:</h2>
         <p>testMapWidth = 12; testMapHeight = 5;<br>
-            let testMapWidth_Actual = testMapWidth * 70;<br>
-            let testMapHeight_Actual = testMapHeight * 70;</p>
+           testMapWidth_Actual = testMapWidth * 70;<br>
+           testMapHeight_Actual = testMapHeight * 70;</p>
         <canvas class='canvas' width='840' height='420' style='border:3px solid lightcoral'>
             Your browser does not support the canvas tag from HTML5.
         </canvas>
-        <p>Mobile support currently unavailable<br>Controls:<br>W - Jump<br>A - Left<br>D - Right<br>S - Duck<br>Z - Face front</p>
+        <p id='controls' style='display: none;'>Mobile support currently unavailable<br>Controls:<br>W - Jump<br>A - Left<br>D - Right<br>S - Duck<br>Z - Face front</p>
         <p style='font-size: 12px;'>Art created by Kenney Vleugels (www.kenney.nl) from <a href="http://opengameart.org">OpenGameArt.Org</a></p>
         <script src='./scripts/ui.js'></script>
         <script src='./scripts/main.js'></script>
