@@ -10,11 +10,11 @@
 
 // this will be our tile sprite sheet for all our tiles:
 let gTileSpriteSheet = new Image();
-gTileSpriteSheet.setAttribute('src', './resources/tile/tile_sprites.PNG');
+gTileSpriteSheet.setAttribute('src', './resources/tile/tile_sprites.png');
 let gBackground_Blue = new Image();
-gBackground_Blue.setAttribute('src', './resources/tile/bg.PNG');
+gBackground_Blue.setAttribute('src', './resources/tile/bg.png');
 let gBackground_Castle = new Image();
-gBackground_Castle.setAttribute('src', './resources/tile/bg_castle.PNG');
+gBackground_Castle.setAttribute('src', './resources/tile/bg_castle.png');
 
 
 class gTileClass

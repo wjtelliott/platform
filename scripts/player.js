@@ -140,7 +140,7 @@ class gPlayer extends gEntity
 }
 
 // create the player object
-let pobj = new gPlayer('./resources/player/green_sprites.PNG', {x: 20, y: 20}, {x: 0, y:0});
+let pobj = new gPlayer('./resources/player/green_sprites.png', {x: 20, y: 20}, {x: 0, y:0});
 
 // player button listeners
 window.addEventListener('keydown', gUtil.keyDownListener, false);
