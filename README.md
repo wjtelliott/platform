@@ -24,6 +24,7 @@ Latest commit features:
 - Basic map class & functions (still needs work)
 - Player viewport camera
 - Fixed velocity clamp on upwards movement
+- Github IO Pages now works, with temp buttons to load
 
 Next commit(s) features:
 - Rework air strafe to flex player control
@@ -37,9 +38,7 @@ Next commit(s) features:
 
 ## Known bugs:
 
-1. loadScripts() causes memory leaks **unless running on local machine.**
-2. startGame() causes memory leaks **unless running on local machine.**
-3. If player velocity is higher than width of platform, collision is ignored.
+1. If player velocity is higher than width of platform, collision is ignored.
 
 
 ***
