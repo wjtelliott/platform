@@ -2,20 +2,36 @@
 <html>
     <head>
         <link rel='stylesheet' href='./style.css'>
+        <title>wjtelliott/platform git io</title>
     </head>
     <body>
-        <h1>wjtelliott/platform</h1>
-        <p>Click the buttons below to load the test map & start the demonstration</p>
-        <h2>random gen map info:</h2>
-        <p>testMapWidth = 12; testMapHeight = 5;<br>
-           testMapWidth_Actual = testMapWidth * 70;<br>
-           testMapHeight_Actual = testMapHeight * 70;</p>
-        <canvas class='canvas' width='840' height='420' style='border:3px solid lightcoral'>
-            Your browser does not support the canvas tag from HTML5.
-        </canvas>
-        <p id='controls' style='display: none;'>Mobile support currently unavailable<br>Controls:<br>W - Jump<br>A - Left<br>D - Right<br>S - Duck<br>Z - Face front</p>
-        <p style='font-size: 12px;'>Art created by Kenney Vleugels (www.kenney.nl) from <a href="http://opengameart.org">OpenGameArt.Org</a></p>
-        <script src='./scripts/ui.js'></script>
-        <script src='./scripts/main.js'></script>
+        <div class='container'>
+            <header>
+                <h1>wjtelliott/platform</h1>
+                <h2>Click the start button below to begin the demonstration</h2>
+            </header>
+            <aside>
+                <h2>random gen map info:</h2>
+                <p>testMapWidth = 12; testMapHeight = 5;<br>
+                testMapWidth_Actual = testMapWidth * 70;<br>
+                testMapHeight_Actual = testMapHeight * 70;</p>
+
+                <p>Debug content will go here: Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae nobis eum et ullam voluptate. Enim quisquam quos maiores laboriosam veniam ex, voluptate unde dolor quia quo dolore placeat perspiciatis dolores.</p>
+            </aside>
+            <main>
+                <!--We need to set the size inline-->
+                <canvas class='canvas' width='840' height='420'>
+                    Your browser does not support the canvas tag from HTML5
+                </canvas>
+                <p id='controls' style='display: none;'>Mobile controls support currently unavailable<br>Controls:<br>W - Jump<br>A - Left<br>D - Right<br>S - Duck<br>Z - Face front</p>
+                <!--UI and then main will load the rest-->
+                <script src='./scripts/ui.js'></script>
+                <script src='./scripts/main.js'></script>
+            </main>
+            <footer>
+                <p>Art created by Kenney Vleugels (www.kenney.nl) from <a href="http://opengameart.org">OpenGameArt.Org</a></p>
+            </footer>
+        </div>
+        
     </body>
 </html>

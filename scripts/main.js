@@ -9,10 +9,11 @@ let scriptsList = [
     './scripts/gutil.js',
     './scripts/gtypes.js',
 ];
-const loadScripts = function()
+const loadScripts = function(_callback)
 {
     if (scriptsList.length > 0)
         runJScriptFile(scriptsList.pop());
+    else _callback();
 }
 function runJScriptFile(path)
 {
@@ -20,10 +21,16 @@ function runJScriptFile(path)
     script.setAttribute('src', path);
 
     // Make sure we declare this before appending it to body
-    script.onload = function() { loadScripts(); };
+    script.onload = function() { loadScripts(loadScriptsCallback); };
     document.getElementsByTagName("head")[0].appendChild(script);
 }
 
+function loadScriptsCallback()
+{
+    testBgMap.loadTestRoom();
+    document.querySelector('#startBtn').textContent = 'Start Game';
+    document.querySelector('#startBtn').style = 'display: block;';
+}
 
 
 window.onload = function()
@@ -32,16 +39,17 @@ window.onload = function()
 
     let basicMainMenu = new gBasicMenu();
     // basicMainMenu.addButton('loadScriptBtn', 'Load Scripts (do this first)', 'loadScripts();', true);
-    loadScripts(); // No need for a button on this
-    basicMainMenu.addButton('loadMapBtn', 'Load map', 'testBgMap.loadTestRoom(); document.querySelector(\'#startBtn\').style = \'display: block;\'', true);
+    
+    // No need for a button on this
+    //basicMainMenu.addButton('loadMapBtn', 'Load map', 'testBgMap.loadTestRoom(); document.querySelector(\'#startBtn\').style = \'display: block;\'', true);
     
     basicMainMenu.addButton('startBtn', 'Start game', 'startGame(); document.querySelector(\'#controls\').style = \'display: block;\'', true);
 
     basicMainMenu.pushToDoc();
 
-    basicMainMenu.show();
-
-    document.querySelector('#startBtn').style = "display: none;";
+    loadScripts(loadScriptsCallback);
+    
+    //document.querySelector('#startBtn').style = "display: none;";
 };
 
 

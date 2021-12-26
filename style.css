@@ -1,22 +1,75 @@
-*
+/*First pass at trying to get this to format on mobile*/
+
+:root
+{
+    --prussian-blue: #002642;
+    --claret: #840032;
+    --gainsboro: #E5DADA;
+    --gamboge: #E59500;
+    --border-color: 3px solid coral;
+    --large-font: 38px;
+    --medium-font: 16px;
+    --small-font: 14px;
+}
+
+body
+{
+    background-color: var(--prussian-blue);
+    margin: 0;
+    font-family: sans-serif;
+    text-align: center;
+    color: var(--gamboge);
+}
+
+.container
+{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+aside
+{
+    flex-grow: 1;
+    
+}
+
+main
+{
+    min-height: 90vh;
+    flex-grow: 5;
+}
+
+header
 {
     text-align: center;
+    font-size: var(--large-font);
+}
+
+header, footer
+{
+    background-color: var(--claret);
+    flex-grow: 1;
 }
 
 h2
 {
-    font-size: 16px;
+    font-size: var(--medium-font);
 }
 
-p
+h1
 {
-    font-size: 14px;
+    font-size: var(--large-font);
 }
 
 canvas
 {
     margin: auto;
     display: block;
+    border: var(--border-color);
+    width: 320;
+    height: 180;
 }
 
 button
@@ -25,4 +78,31 @@ button
     color: ghostwhite;
     background-color: black;
     margin: auto;
+}
+
+footer
+{
+    font-size: var(--medium-font);
+}
+
+/*Desktop*/
+@media only screen and (min-width: 800px)
+{
+    .container
+    {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    aside
+    {
+        max-width: 20%;
+    }
+    main
+    {
+        max-width: 80%;
+    }
+    header, footer
+    {
+        width: 100%;
+    }
 }

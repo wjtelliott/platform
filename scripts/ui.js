@@ -46,13 +46,13 @@ class gBasicMenu
             if (this.buttons.length > 0)
                 this.buttons.forEach(function(e)
                 {
-                    document.body.append(e);
+                    document.querySelector('main').append(e);
                 });
         if (this.labels != null)
             if (this.labels.length > 0)
                 this.labels.forEach(function(e)
                 {
-                    document.body.append(e);
+                    document.querySelector('main').append(e);
                 });
 
         this.hide();
