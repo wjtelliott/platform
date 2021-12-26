@@ -139,48 +139,8 @@ class gPlayer extends gEntity
     }
 }
 
-// create the player object
-let pobj = new gPlayer('./resources/player/green_sprites.png', {x: 20, y: 20}, {x: 0, y:0});
+
 
 // player button listeners
 window.addEventListener('keydown', gUtil.keyDownListener, false);
 window.addEventListener('keyup', gUtil.keyUpListener, false);
-
-
-let testBgMap = new gMap();
-//testBgMap.loadTestRoom();
-
-// simple demo loop, move this later when a real game loop is made
-function demo()
-{
-
-    // final version of game loop will:
-    /**
-     * Clear screen
-     * Update all logic (no order)
-     * Draw (background, tiles, objects, enemies, player)
-     */
-
-
-    gRender.clearScreen();
-
-    testBgMap.testDrawBg();
-
-
-    pobj.update();
-    if (pobj.isFacingLeft)
-    {
-        gRender.drawSerializedImageFlipped(pobj.serializeObjectToDraw());
-    } else {
-        
-        gRender.drawSerializedImage(pobj.serializeObjectToDraw());
-    }
-
-    //basic camera positioning
-    let nV = new gVector2(parseInt(pobj.position.x + (pobj.frameData.frameWidth / 2) - (gRender.drawSpace.width / 2)),
-                            parseInt(pobj.position.y - (gRender.drawSpace.height / 2) + (pobj.frameData.frameHeight / 2)));
-    gRender.updateCameraPosition(nV);
-    
-}
-
-

@@ -22,9 +22,14 @@ let gRender =
         this.cameraPosition = newPos;
         this.context.translate(-delta.x, -delta.y);
     },
-    clearScreen: function()
+    clearScreen: function(x, y, width, height)
     {
-        this.context.clearRect(-200, 0, this.drawSpace.width + 500, this.drawSpace.height);
+        let clearBuffer = 500;
+        x = (x == null) ? -clearBuffer : x;
+        y = (y == null) ? -clearBuffer : y;
+        width = (width == null) ? this.drawSpace.width + clearBuffer : width;
+        height = (height == null) ? this.drawSpace.height + clearBuffer : height;
+        this.context.clearRect(x, y, width, height);
     },
     drawImage: function(sprites, sourceX, sourceY, sourceWidth, sourceHeight, posX, posY, drawWidth, drawHeight)
     {

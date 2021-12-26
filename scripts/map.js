@@ -55,10 +55,23 @@ class gMap
                     )
                 );
 
-        //Move the player to position
-
+        //Spawn Move the player to position
+        this.playerObject = new gPlayer('./resources/player/green_sprites.png', {x: 20, y: 20}, {x: 0, y:0});
 
         //make some objects and enemies later on 
+    }
+
+    testUpdateBg()
+    {
+        if (this.playerObject != null)
+        {
+            this.playerObject.update();
+
+            //basic camera positioning
+            let newViewpoint = new gVector2(parseInt(this.playerObject.position.x + (this.playerObject.frameData.frameWidth / 2) - (gRender.drawSpace.width / 2)),
+                    parseInt(this.playerObject.position.y - (gRender.drawSpace.height / 2) + (this.playerObject.frameData.frameHeight / 2)));
+            gRender.updateCameraPosition(newViewpoint);
+        }
     }
 
     testDrawBg()
@@ -74,5 +87,33 @@ class gMap
                     gRender.drawSerializedImage(a.serializeTileToDraw());
             }, null
         )
+
+        if (this.playerObject != null)
+            if (!this.playerObject.isFacingLeft)
+                gRender.drawSerializedImage(this.playerObject.serializeObjectToDraw());
+            else gRender.drawSerializedImageFlipped(this.playerObject.serializeObjectToDraw());
     }
+}
+
+
+let testBgMap = new gMap();
+
+// simple demo loop, move this later when a real game loop is made
+function demo()
+{
+
+    // final version of game loop will:
+    /**
+     * Clear screen
+     * Update all logic (no order)
+     * Draw (background, tiles, objects, enemies, player)
+     */
+
+
+    gRender.clearScreen();
+
+    testBgMap.testDrawBg();
+
+    testBgMap.testUpdateBg();
+    
 }
