@@ -17,7 +17,7 @@ let gBackground_Castle = new Image();
 gBackground_Castle.setAttribute('src', './resources/tile/bg_castle.png');
 
 
-class gTileClass
+class gTile
 {
     spriteSource = {x: 0, y: 0, width: 1, height: 1};
     position = {x: 0, y: 0};
@@ -51,6 +51,11 @@ class gTileClass
         }
     }
 
+    getPosition()
+    {
+        return this.position;
+    }
+
     serializeTileToDraw()
     {
         return (this.spriteSource == null) ? null : 
@@ -68,7 +73,7 @@ class gTileClass
     }
 }
 
-class gBackgroundTileClass extends gTileClass
+class gBackgroundTile extends gTile
 {
     backgroundType;
     constructor(newSource, newPos) { super(newSource, newPos); this.backgroundType = 1; this.isSolid = false; }

@@ -53,11 +53,20 @@ class gUtil
         return (velocityY + positionY + frameHeight > floorY &&
             velocityY + positionY + frameHeight < floorYBottom) ?
         
-        (floorY - positionY - frameHeight)          
+        (floorY - positionY - frameHeight)
         : 
         velocityY;
     
 
+    }
+
+    static distanceToObject(o1, o2)
+    {
+        if (o1 == null || o2 == null) return -1;
+
+        let v1 = o1.x - o2.x;
+        let v2 = o1.y - o2.y;
+        return (v1 * v1) + (v2 * v2);
     }
 
     static serializePlayerFrameData(x, y, width, height, nextFrameName)

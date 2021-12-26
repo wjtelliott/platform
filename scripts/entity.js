@@ -1,7 +1,7 @@
 //Basic game entity. This will be imported to multiple game objects
 
 const ENTITY_MAX_SPEED = 2;
-const ENTITY_TERMINAL_FALL = 5;
+const ENTITY_TERMINAL_FALL = 10;
 const ENTITY_FRICTION = 0.2;
 const ENTITY_FRICTION_ICE = 0.05;
 const ENTITY_GRAVITY = .3;
@@ -50,8 +50,6 @@ class gEntity
         };
     }
 
-
-
     update()
     {
         /*
@@ -69,7 +67,7 @@ class gEntity
 
         // basic collision check with bottom of map:
         if (this.velocity.y != 0)
-            this.velocity.y = gUtil.collisionFloorCheck(this.velocity.y, this.position.y, this.size.height, 220, 230);
+            this.velocity.y = gUtil.collisionFloorCheck(this.velocity.y, this.position.y, this.size.height, 150, 560);
         
         // add to our position ( velocity should already have been changed for collisions )
         this.position.x += this.velocity.x;

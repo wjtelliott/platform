@@ -126,14 +126,54 @@ class gPlayer extends gEntity
         }
     }
 
-    update()
+    checkTileMapCollisions(tileMap)
+    {
+        if (this.position.y == 0) return;
+        let COL_CHECK = 10000;
+        let pPosition = this.position;
+        let pVelocity = this.velocity;
+        let pFrameHeight = this.frameData.frameHeight;
+        let pFrameWidth = this.frameData.frameWidth;
+
+        let resultY = this.velocity.y;
+        let onTile = false;
+        tileMap.forEach(
+            function(e)
+            {
+                if (e == null) return;
+                if (e.position == null) return;
+                if (onTile) return;
+                //optimize, don't check collisions on objects too far away
+                console.log('before' + resultY);
+                if (gUtil.distanceToObject(pPosition, e.position) < COL_CHECK)
+                {
+                    if (pPosition.x + pFrameWidth >= e.position.x &&
+                        pPosition.x <= e.position.x + 70)
+                        {
+                            resultY = gUtil.collisionFloorCheck(pVelocity.y, pPosition.y, pFrameHeight, e.position.y, e.position.y + 70/*Tile size*/);
+                        }
+                    onTile = true;
+                }
+                console.log('after' + resultY);
+            }
+        );
+
+        this.velocity.y = resultY;
+    }
+
+    update(tileMap)
     {
         this.updateFrameCounter()
     
-        this.updatePlayerMovement();
+                // Forces
+                super.update();
+
+        this.checkTileMapCollisions(tileMap);
         
-        // Forces
-        super.update();
+
+        
+        this.updatePlayerMovement();
+
 
         this.updatePlayerAnimations_Final();
     }

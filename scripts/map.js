@@ -36,7 +36,7 @@ class gMap
         for (let i = 0; i < backgroundAmountHeight; i++)
             for (let ii = 0; ii < backgroundAmountWidth; ii++)
                 this.backgroundTileMap.push(
-                    new gBackgroundTileClass(
+                    new gBackgroundTile(
                         null, 
                         new gVector2(
                                 ii * gBackground_Blue.width,
@@ -47,13 +47,21 @@ class gMap
 
 
         //Populate a tilemap
-        for (let i = 0; i < testMapWidth; i++)
-            for (let ii = 0; ii < testMapHeight; ii++)
-                this.tileMap.push(
-                    new gTileClass(
-                        gTileClass.randomTileSource(), new gVector2(i*70, ii*70)
-                    )
-                );
+        for (let i = 0; i < 11; i++)
+        {
+            this.tileMap.push(
+                new gTile(
+                    gTile.randomTileSource(), new gVector2(i*70, 140)
+                )
+            );
+        }
+        // for (let i = 0; i < testMapWidth; i++)
+        //     for (let ii = 0; ii < testMapHeight; ii++)
+        //         this.tileMap.push(
+        //             new gTile(
+        //                 gTile.randomTileSource(), new gVector2(i*70, ii*70)
+        //             )
+        //         );
 
         //Spawn Move the player to position
         this.playerObject = new gPlayer('./resources/player/green_sprites.png', {x: 20, y: 20}, {x: 0, y:0});
@@ -65,7 +73,7 @@ class gMap
     {
         if (this.playerObject != null)
         {
-            this.playerObject.update();
+            this.playerObject.update(this.tileMap);
 
             //basic camera positioning
             let newViewpoint = new gVector2(parseInt(this.playerObject.position.x + (this.playerObject.frameData.frameWidth / 2) - (gRender.drawSpace.width / 2)),
