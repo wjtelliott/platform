@@ -50,7 +50,46 @@ class gEntity
         };
     }
 
-    update()
+
+    checkTileMapCollisions(tileMap)
+    {
+        //TODO:
+        /**
+         * This only tests for collision on top of the platform. does not test on sides or bottom.
+         */
+
+
+        // we have to create these vars. the for-each func can't see the scope of 'this'
+        let COL_CHECK = 20000; // With this value, we will be testing the closest 2-3 tiles near us
+        let pPosition = this.position;
+        let pVelocity = this.velocity;
+        let pFrameHeight = this.frameData.frameHeight;
+        let pFrameWidth = this.frameData.frameWidth;
+
+        let resultY = this.velocity.y;
+        tileMap.forEach(
+            function(e)
+            {
+                if (e == null) return;
+                if (e.position == null) return;
+
+                //optimize, don't check collisions on objects too far away
+                if (gUtil.distanceToObject(pPosition, e.position) < COL_CHECK)
+                {
+                    if (pPosition.x + pFrameWidth >= e.position.x &&
+                        pPosition.x <= e.position.x + 70)
+                        {
+                            resultY = gUtil.collisionFloorCheck(pVelocity.y, pPosition.y, pFrameHeight, e.position.y, e.position.y + 70/*Tile size*/);
+                        }
+                }
+            }
+        );
+        return resultY;
+    }
+
+
+    // Update with tilemap for player entity
+    update(tileMap)
     {
         /*
             When dealing with forces, we will prioritize the following values from entity global or (this.)entity personal:
@@ -67,8 +106,10 @@ class gEntity
 
         // basic collision check with bottom of map:
         if (this.velocity.y != 0)
-            this.velocity.y = gUtil.collisionFloorCheck(this.velocity.y, this.position.y, this.size.height, 150, 560);
-        
+            this.velocity.y = gUtil.collisionFloorCheck(this.velocity.y, this.position.y, this.size.height, 550, 560);
+        if (this.velocity.y != 0)
+            this.velocity.y = this.checkTileMapCollisions(tileMap);
+
         // add to our position ( velocity should already have been changed for collisions )
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;

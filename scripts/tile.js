@@ -39,16 +39,22 @@ class gTile
 
     static randomTileSource()
     {
-        switch (Math.floor(Math.random() * 6))
-        {
-            default:
-            case 0:
-            case 1:
-            case 2: return null;
-            case 3: return {x: 288, y: 792, width: 70, height: 70};
-            case 4: return {x: 360, y: 792, width: 70, height: 70};
-            case 5: return {x: 288, y: 432, width: 70, height: 70};
-        }
+
+        let randomX = Math.floor(Math.random() * 13);
+        let randomY = Math.floor(Math.random() * 13);
+
+        return {x: randomX * 72, y: randomY * 72, width: 70, height: 70};
+
+        // switch (Math.floor(Math.random() * 6))
+        // {
+        //     default:
+        //     case 0: return {x: 0, y: 0, width: 70, height: 70};
+        //     case 1: return {x: 288+144, y: 720, width: 70, height: 70};
+        //     case 2: return {x: 504, y: 576, width: 70, height: 70};
+        //     case 3: return {x: 288, y: 792, width: 70, height: 70};
+        //     case 4: return {x: 360, y: 792, width: 70, height: 70};
+        //     case 5: return {x: 288, y: 432, width: 70, height: 70};
+        // }
     }
 
     getPosition()
