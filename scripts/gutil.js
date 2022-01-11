@@ -2,12 +2,14 @@ class gUtil
 {
     static clampVelocity(max, current, min, jump)
     {
-        jump = (jump == null) ? false : true;
+        jump = jump ?? false;
+
+        // If we are jumping & traveling upwards, we should not clamp.
         if (jump && current < 0) return current;
 
+        // Check that min/max are assigned and are set correctly.
         if (max == null || current == null) return 0;
         if (min == null) min = max - (max * 2);
-
         if (min > max)
         {
             let temp = min;
@@ -15,16 +17,15 @@ class gUtil
             max = temp;
         }
 
-        current = (current > max) ? max : current;
-        current = (current < min) ? min : current;
-        return current;
+        return (current > max) ? max :
+            (current < min) ? min :
+            current;
     }
 
     static applyFriction(frictionValue, velocityX)
     {
-        if (frictionValue == null) frictionValue = 0;
-        if (velocityX == null) velocityX = 0;
-        
+        frictionValue = frictionValue ?? 0;
+        velocityX = velocityX ?? 0;        
 
         return (velocityX > 0) ?
             (velocityX - frictionValue < 0) ? 0 : velocityX - frictionValue
@@ -42,22 +43,16 @@ class gUtil
     }
 
     static collisionFloorCheck(velocityY, positionY, frameHeight, floorY, floorYBottom)
-    {
-        
+    {        
         // Check if velocity + position (AND FRAME HEIGHT) is greater than the floor.
         // if so. Make the velocity = the difference to make the floorY == positiionY + frame + velocityY
         // return as the velocity Y
-        
-        
 
         return (velocityY + positionY + frameHeight > floorY &&
-            velocityY + positionY + frameHeight < floorYBottom) ?
-        
+            velocityY + positionY + frameHeight < floorYBottom) ?        
         (floorY - positionY - frameHeight)
         : 
         velocityY;
-    
-
     }
 
     static distanceToObject(o1, o2)
@@ -66,6 +61,10 @@ class gUtil
 
         let v1 = o1.x - o2.x;
         let v2 = o1.y - o2.y;
+
+        /*
+        This will return distance squared. Do NOT sqrt this (takes too much load time)
+         */
         return (v1 * v1) + (v2 * v2);
     }
 

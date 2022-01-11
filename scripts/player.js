@@ -140,8 +140,6 @@ class gPlayer extends gEntity
         
         this.updatePlayerMovement();
 
-        this.checkTileMapCollisions(tileMap);
-
         // Forces
         super.update(tileMap);
 
